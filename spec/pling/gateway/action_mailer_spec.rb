@@ -40,6 +40,17 @@ describe Pling::Gateway::ActionMailer do
 
       gateway.deliver(message, device)
     end
+
+    it 'should allow configuration of the :mailer' do
+      mailer = mock()
+      mailer.should_receive(:pling_message).
+        with(message, device, hash_including(valid_configuration)).
+        and_return(mail)
+
+      gateway = Pling::Gateway::ActionMailer.new(valid_configuration.merge(:mailer => mailer))
+
+      gateway.deliver(message, device)
+    end
   end
 
   describe '#deliver' do
