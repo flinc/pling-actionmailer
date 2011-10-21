@@ -37,10 +37,10 @@ module Pling
       private
 
         def default_configuration
-          {
+          super.merge({
             :html => true,
             :text => true
-          }
+          })
         end
 
     end
