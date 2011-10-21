@@ -2,12 +2,12 @@
 
 Gem::Specification.new do |s|
   s.name        = "pling-actionmailer"
-  s.version     = "0.0.1"
+  s.version     = "0.1.0"
   s.authors     = ["benedikt", "t6d", "fabrik42"]
   s.email       = ["benedikt@synatic.net", "me@t6d.de", "fabrik42@gmail.com"]
   s.homepage    = "http://flinc.github.com/pling-actionmailer"
-  s.summary     = %q{}
-  s.description = %q{}
+  s.summary     = %q{Pling Gateway to ActionMailer}
+  s.description = %q{Pling Gateway to ActionMailer}
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
