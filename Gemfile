@@ -1,9 +1,8 @@
 source 'http://rubygems.org'
 
-# Specify your gem's dependencies in pling.gemspec
 gemspec
 
-gem 'pling', :path => '../pling'
+gem 'pling', :git => 'git://github.com/flinc/pling.git'
 
 gem 'guard'
 gem 'guard-rspec'
