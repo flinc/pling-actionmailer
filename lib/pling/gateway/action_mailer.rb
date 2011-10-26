@@ -10,12 +10,9 @@ module Pling
         def pling_message(message, device, configuration)
           @message, @device, @configuration = message, device, configuration
 
-          use_text = configuration.delete(:text)
-          use_html = configuration.delete(:html)
-
           mail(:to => device.identifier, :from => configuration[:from]) do |format|
-            format.text { render 'pling/mailer/pling_message' } if use_text
-            format.html { render 'pling/mailer/pling_message' } if use_html
+            format.text { render 'pling/mailer/pling_message' } if configuration[:text]
+            format.html { render 'pling/mailer/pling_message' } if configuration[:html]
           end
         end
       end

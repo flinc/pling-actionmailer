@@ -51,6 +51,13 @@ describe Pling::Gateway::ActionMailer do
 
       gateway.deliver(message, device)
     end
+
+    it 'should not change the configuration' do
+      configuration = valid_configuration.merge(:html => true, :text => false)
+      gateway = Pling::Gateway::ActionMailer.new(configuration)
+
+      expect { gateway.deliver(message, device) }.to_not change(configuration, :count)
+    end
   end
 
   describe '#deliver' do
