@@ -13,7 +13,7 @@ module Pling
           use_text = configuration.delete(:text)
           use_html = configuration.delete(:html)
 
-          mail(configuration.merge(:to => device.identifier)) do |format|
+          mail(:to => device.identifier, :from => configuration[:from]) do |format|
             format.text { render 'pling/mailer/pling_message' } if use_text
             format.html { render 'pling/mailer/pling_message' } if use_html
           end
