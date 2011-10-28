@@ -25,7 +25,7 @@ module Pling
 
       protected
 
-        def _deliver(message, device)
+        def deliver!(message, device)
           mailer = configuration[:mailer] || Pling::Gateway::ActionMailer::Mailer
           mailer.pling_message(message, device, configuration).deliver
         end
