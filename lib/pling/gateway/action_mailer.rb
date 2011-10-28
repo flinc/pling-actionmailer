@@ -23,12 +23,10 @@ module Pling
         setup_configuration(configuration, :require => [:from])
       end
 
-      protected
-
-        def deliver!(message, device)
-          mailer = configuration[:mailer] || Pling::Gateway::ActionMailer::Mailer
-          mailer.pling_message(message, device, configuration).deliver
-        end
+      def deliver!(message, device)
+        mailer = configuration[:mailer] || Pling::Gateway::ActionMailer::Mailer
+        mailer.pling_message(message, device, configuration).deliver
+      end
 
       private
 
