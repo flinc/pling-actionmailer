@@ -8,7 +8,7 @@ module Pling
       def pling_message(message, device, configuration)
         @message, @device, @configuration = message, device, configuration
 
-        mail(:to => device.identifier, :from => configuration[:from]) do |format|
+        mail(:to => device.identifier, :from => configuration[:from], :subject => message.subject) do |format|
           format.text { render 'pling/mailer/pling_message' } if configuration[:text]
           format.html { render 'pling/mailer/pling_message' } if configuration[:html]
         end

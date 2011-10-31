@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Pling::ActionMailer::Mailer do
   subject { described_class }
 
-  let(:message) { Pling::Message.new('Hello from Pling') }
+  let(:message) { Pling::Message.new(:body => 'Hello from Pling', :subject => 'Subject') }
   let(:device)  { Pling::Device.new(:identifier => 'DEVICEIDENTIFIER', :type => :email) }
   let(:mail)    { described_class.pling_message(message, device, configuration) }
   let(:configuration) do
@@ -47,6 +47,10 @@ describe Pling::ActionMailer::Mailer do
 
     it 'should use device.identifier as recipient' do
       mail.to.should include('DEVICEIDENTIFIER')
+    end
+
+    it 'should use message.subject as subject' do
+      mail.subject.should include('Subject')
     end
 
     it 'should use sender from the configuration' do
