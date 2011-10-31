@@ -6,7 +6,7 @@
 
 ## Install
 
-    gem 'pling-actionmailer', :require => 'pling/gateways/action_mailer'
+    gem 'pling-actionmailer', :require => 'pling/action_mailer'
 
 ## Build Status
 
