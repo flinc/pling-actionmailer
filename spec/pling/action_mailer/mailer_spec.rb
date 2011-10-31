@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Pling::Gateway::ActionMailer::Mailer do
+describe Pling::ActionMailer::Mailer do
   subject { described_class }
 
   let(:message) { Pling::Message.new('Hello from Pling') }
@@ -14,7 +14,7 @@ describe Pling::Gateway::ActionMailer::Mailer do
     }
   end
 
-  specify { described_class.ancestors =~ ActionMailer::Base }
+  specify { described_class.ancestors =~ ::ActionMailer::Base }
 
   describe '.pling_message' do
 

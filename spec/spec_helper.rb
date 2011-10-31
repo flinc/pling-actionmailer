@@ -3,7 +3,8 @@ require 'bundler'
 
 Bundler.require
 
-require 'pling/gateway/action_mailer'
+require 'pling/action_mailer'
+require 'action_mailer'
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Pling::Gateway::ActionMailer do
+describe Pling::ActionMailer::Gateway do
 
   let(:valid_configuration) do
     { :from => 'random@example.com' }
@@ -12,11 +12,11 @@ describe Pling::Gateway::ActionMailer do
   let(:mail) { mock(:deliver => true) }
 
   before do
-    Pling::Gateway::ActionMailer::Mailer.stub(:pling_message => mail)
+    Pling::ActionMailer::Mailer.stub(:pling_message => mail)
   end
 
   it 'should handle various action mailer related device types' do
-    Pling::Gateway::ActionMailer.handled_types.should =~ [:mail, :email, :actionmailer]
+    Pling::ActionMailer::Gateway.handled_types.should =~ [:mail, :email, :actionmailer]
   end
 
   context 'when created with an invalid configuration' do
@@ -24,7 +24,7 @@ describe Pling::Gateway::ActionMailer do
       it "should raise an error when :#{attribute} is missing" do
         configuration = valid_configuration
         configuration.delete(attribute)
-        expect { Pling::Gateway::ActionMailer.new(configuration) }.to raise_error(ArgumentError, /:#{attribute} is missing/)
+        expect { Pling::ActionMailer::Gateway.new(configuration) }.to raise_error(ArgumentError, /:#{attribute} is missing/)
       end
     end
   end
@@ -32,9 +32,9 @@ describe Pling::Gateway::ActionMailer do
   context 'when created with a valid configuration' do
     it 'should pass the full configuration to the mailer' do
       configuration = valid_configuration.merge({ :something => true })
-      gateway = Pling::Gateway::ActionMailer.new(configuration)
+      gateway = Pling::ActionMailer::Gateway.new(configuration)
 
-      Pling::Gateway::ActionMailer::Mailer.
+      Pling::ActionMailer::Mailer.
         should_receive(:pling_message).
         with(anything, anything, hash_including(configuration)).and_return(mail)
 
@@ -47,21 +47,21 @@ describe Pling::Gateway::ActionMailer do
         with(message, device, hash_including(valid_configuration)).
         and_return(mail)
 
-      gateway = Pling::Gateway::ActionMailer.new(valid_configuration.merge(:mailer => mailer))
+      gateway = Pling::ActionMailer::Gateway.new(valid_configuration.merge(:mailer => mailer))
 
       gateway.deliver(message, device)
     end
 
     it 'should not change the configuration' do
       configuration = valid_configuration.merge(:html => true, :text => false)
-      gateway = Pling::Gateway::ActionMailer.new(configuration)
+      gateway = Pling::ActionMailer::Gateway.new(configuration)
 
       expect { gateway.deliver(message, device) }.to_not change(configuration, :count)
     end
   end
 
   describe '#deliver' do
-    subject { Pling::Gateway::ActionMailer.new(valid_configuration) }
+    subject { Pling::ActionMailer::Gateway.new(valid_configuration) }
 
     it 'should raise an error if no message is given' do
       expect { subject.deliver(nil, device) }.to raise_error
@@ -82,7 +82,7 @@ describe Pling::Gateway::ActionMailer do
     end
 
     it 'should try to deliver the given message' do
-      Pling::Gateway::ActionMailer::Mailer.
+      Pling::ActionMailer::Mailer.
         should_receive(:pling_message).
         with(message, device, hash_including(valid_configuration)).
         and_return(mail)
