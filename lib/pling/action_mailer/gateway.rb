@@ -8,7 +8,8 @@ module Pling
       handles :email, :mail, :actionmailer
 
       def initialize(configuration)
-        setup_configuration(configuration, :require => [:from])
+        super
+        require_configuration([:from])
       end
 
       def deliver!(message, device)
