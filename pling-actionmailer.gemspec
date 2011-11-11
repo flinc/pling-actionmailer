@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name        = "pling-actionmailer"
-  s.version     = "0.2.0"
+  s.version     = "0.3.0"
   s.authors     = ["benedikt", "t6d", "fabrik42"]
   s.email       = ["benedikt@synatic.net", "me@t6d.de", "fabrik42@gmail.com"]
   s.homepage    = "http://flinc.github.com/pling-actionmailer"
